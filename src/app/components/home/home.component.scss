@@ -1,0 +1,26 @@
+.clearButton, .saveButton {
+    background-color: transparent;
+    width: max-content;
+    height: max-content;
+    align-self: center;
+    margin-top: 30px;
+}
+
+.clearButton {
+    color: red;
+    border-color: red;
+}
+
+.saveButton {
+    color: red;
+    border-color: red;
+}
+
+mat-form-field {
+    margin-top: 30px;
+}
+
+mat-icon {
+    vertical-align: middle;
+    color: red;
+}

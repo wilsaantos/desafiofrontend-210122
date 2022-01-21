@@ -1,0 +1,55 @@
+<div class="homePage" fxFlex fxLayout="column">
+
+
+
+  <form [formGroup]="formGroup" fxLayoutGap="15px" fxLayout="row" fxLayoutAlign.lg="center center" fxLayout.xs="column">
+    <mat-form-field>
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="nome">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Telefone</mat-label>
+      <input matInput formControlName="telefone" [value]="formGroup.get('telefone').value | celular">
+    </mat-form-field>
+
+
+    <button mat-stroked-button class="clearButton" (click)="clearData()">Limpar</button>
+    <button mat-stroked-button class="saveButton" (click)="onSubmit()" [disabled]="!formGroup.valid">Salvar</button>
+  </form>
+
+
+
+  <div *ngIf="dados.length > 0" fxLayout="column">
+
+    <mat-form-field>
+      <input matInput placeholder="Pesquisar" autocomplete="off" (keyup)="filterData($event)">
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+        <td mat-cell *matCellDef="let element"> {{element.nome | titlecase}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="telefone">
+        <th mat-header-cell *matHeaderCellDef> Telefone </th>
+        <td mat-cell *matCellDef="let element"> {{element.telefone | celular}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="rmvButton">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element"><button mat-icon-button matTooltip="Remover Pessoa"
+            (click)="removePerson(element)">
+            <mat-icon>person_remove</mat-icon>
+          </button></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+  </div>
+
+</div>
